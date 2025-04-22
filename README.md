@@ -4,17 +4,38 @@ Este projeto é uma aplicação CRUD (Create, Read, Update, Delete) desenvolvida
 
 ## Sumário
 
-1. [Como Executar](#como-executar)
-2. [Como Testar](#como-testar)
-3. [Documentação](#documentação)
-4. [Tratamento de Erros](#tratamento-de-erros)
-5. [Padrões de Projeto e padrões Usados](#padrões-de-projeto-e-padrões-usados)
-6. [Melhorias](#melhorias)
-7. [Conclusão](#conclusão)
-8. [Licença](#licença)
-9. [Contato](#contato)
+1. [Tecnologias Utilizadas](#tecnologias-utilizadas)
+2. [Como Executar](#como-executar)
+3. [Como Testar](#como-testar)
+4. [Documentação](#documentação)
+5. [Tratamento de Erros](#tratamento-de-erros)
+6. [Padrões de Projeto e padrões Usados](#padrões-de-projeto-e-padrões-usados)
+7. [Melhorias](#melhorias)
+8. [Conclusão](#conclusão)
+9. [Licença](#licença)
+10. [Contato](#contato)
 
 ---------
+
+## Tecnologias Utilizadas:
+
+Java 17 – Linguagem de programação para a implementação do sistema.
+
+Spring Boot – Framework para construção de aplicações Java baseadas em microserviços.
+
+Spring Data JPA – Framework para simplificar a interação com bancos de dados relacionais através de Java.
+
+H2 Database – Banco de dados relacional em memória, utilizado para testes e desenvolvimento.
+
+Spring Actuator – Para monitoramento e health checks da aplicação.
+
+Swagger/OpenAPI – Ferramenta para documentação de APIs RESTful.
+
+Spring Boot Starter Web – Dependência básica para criar uma API RESTful com Spring Boot.
+
+Lombok – Biblioteca para reduzir a verbosidade do código com anotações (como @Getter, @Setter, etc).
+
+Maven – Ferramenta de automação de builds e gerenciamento de dependências.
 
 ## Como Executar
 
