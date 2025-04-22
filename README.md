@@ -9,9 +9,10 @@ Este projeto é uma aplicação CRUD (Create, Read, Update, Delete) desenvolvida
 3. [Documentação](#documentação)
 4. [Tratamento de Erros](#tratamento-de-erros)
 5. [Padrões de Projeto e padrões Usados](#padrões-de-projeto-e-padrões-usados)
-6. [Conclusão](#conclusão)
-7. [Licença](#licença)
-8. [Contato](#contato)
+6. [Melhorias](#melhorias)
+7. [Conclusão](#conclusão)
+8. [Licença](#licença)
+9. [Contato](#contato)
 
 ---------
 
@@ -135,6 +136,27 @@ info: Exibe informações gerais sobre a aplicação
 http://localhost:8080/v3/api-docs
 
 Esses endpoints ajudam na monitoração e garantem que a aplicação esteja funcionando corretamente em produção.
+
+## Melhorias
+
+Ativar HTTPS localmente para testes:
+
+1. Gere um certificado (autoassinado para testes)
+
+keytool -genkeypair -alias meu-certificado \
+  -keyalg RSA -keysize 2048 -storetype PKCS12 \
+  -keystore keystore.p12 -validity 3650
+
+2. Coloque o arquivo keystore.p12 no seu projeto (ex: pasta src/main/resources)
+
+3. Configure o application.properties ou application.yml:
+
+server.port=8443
+server.ssl.enabled=true
+server.ssl.key-store=classpath:keystore.p12
+server.ssl.key-store-password=sua_senha
+server.ssl.key-store-type=PKCS12
+server.ssl.key-alias=meu-certificado
 
 ## Conclusão
 
