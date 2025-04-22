@@ -74,7 +74,7 @@ Você pode testar essas funcionalidades usando ferramentas como Postman ou cURL.
 
 A documentação da API estр disponível através do Swagger e pode ser acessada diretamente através da URL:
 
-http://localhost:8080/swagger-ui.html
+http://localhost:8080/swagger-ui/index.html
 
 O Swagger irá fornecer uma interface interativa para visualizar todos os endpoints da API, enviar requisições e ver as respostas.
 
