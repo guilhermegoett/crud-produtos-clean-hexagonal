@@ -6,11 +6,13 @@ Este projeto é uma aplicação CRUD (Create, Read, Update, Delete) desenvolvida
 
 1. [Como Executar](#como-executar)
 2. [Como Testar](#como-testar)
-3. [Documentaусo](#documentação)
-4. [padrões de Projeto e padrões Usados](#padrões-de-projeto-e-padrões-usados)
+3. [Documentação](#documentação)
+4. [Padrões de Projeto e padrões Usados](#padrões-de-projeto-e-padrões-usados)
 5. [Conclusão](#conclusão)
+6. [Licença](#licença)
+7. [Contato](#contato)
 
----
+---------
 
 ## Como Executar
 
@@ -90,7 +92,7 @@ Repository Layer (DAO / Port de saída): Responsável pela persistência dos dad
 
 Essa abordagem permite que o domínio da aplicação permaneça independente de frameworks, detalhes de infraestrutura e interfaces externas.
 
-### padrões de Projeto
+### Padrões de Projeto
 
 DAO (Data Access Object): Usado para encapsular o acesso ao banco de dados, permitindo que a aplicação interaja com as entidades através de métodos como save(), findById(), entre outros.
 
@@ -125,8 +127,6 @@ Se tiver dúvidas ou problemas, sinta-se à vontade para abrir uma issue ou cont
 ## Licença
 
 Este projeto é distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
-
----
 
 ## Contato
 
