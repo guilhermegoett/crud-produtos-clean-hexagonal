@@ -2,7 +2,7 @@
 
 Este projeto é uma aplicação CRUD (Create, Read, Update, Delete) desenvolvida com Spring Boot, utilizando um banco de dados H2 e integrando com o Spring Data JPA. A aplicação foi projetada para gerenciar entidades de produtos de forma simples e eficiente.
 
-## Sumрrio
+## Sumário
 
 1. [Como Executar](#como-executar)
 2. [Como Testar](#como-testar)
@@ -25,6 +25,7 @@ Este projeto é uma aplicação CRUD (Create, Read, Update, Delete) desenvolvida
 1. Clone o repositório:
 
    git clone https://github.com/guilhermegoett/crud-produtos-clean-hexagonal.git
+
    cd crud
 
 2. Navegue até o diretório do projeto e execute o comando Maven para rodar a aplicação:
@@ -32,6 +33,7 @@ Este projeto é uma aplicação CRUD (Create, Read, Update, Delete) desenvolvida
 No terminal:
 
 mvn clean install
+
 mvn spring-boot:run
 
 ## Como Testar
@@ -76,11 +78,17 @@ O Swagger irá fornecer uma interface interativa para visualizar todos os endpoi
 
 ### Arquitetura
 
-O projeto segue uma arquitetura limpa e modular, dividida nas seguintes camadas:
+O projeto adota a Arquitetura Hexagonal (Ports and Adapters) aliada aos princípios de Clean Code, promovendo alta coesão, baixo acoplamento e facilidade de manutenção. A estrutura é organizada em camadas bem definidas:
 
-Controller Layer: Responsрvel por mapear as requisiушes HTTP para os serviços.
-Service Layer: Contém a lógica de negócio e interage com o repositório.
-Repository Layer (DAO): Responsável pela persistência dos dados. Utiliza o Spring Data JPA para abstrair a manipulação direta do banco de dados.
+Controller Layer (Adapter de entrada): Responsável por mapear as requisições HTTP para os serviços da aplicação. Atua como uma porta de entrada para os casos de uso.
+
+Service Layer (Application Service): Contém a lógica de negócio da aplicação. Faz a mediação entre os adaptadores e o núcleo de domínio.
+
+Domain Layer: Representa o núcleo da aplicação, onde ficam as entidades e regras de negócio puras.
+
+Repository Layer (DAO / Port de saída): Responsável pela persistência dos dados. Utiliza o Spring Data JPA para abstrair a manipulação direta do banco de dados. As interfaces (ports) são implementadas por adaptadores que interagem com o banco.
+
+Essa abordagem permite que o domínio da aplicação permaneça independente de frameworks, detalhes de infraestrutura e interfaces externas.
 
 ### padrões de Projeto
 
@@ -94,7 +102,7 @@ Singleton: O Spring Boot usa o padrão Singleton para gerenciar as instâncias d
 
 Service Layer: A camada de serviço é responsрvel por implementar a lзgica de negзcio da aplicação e por interagir com os repositórios para manipulaусo dos dados.
 
-Controller Layer: Utiliza o padrão de design MVC (Model-View-Controller) para separar as preocupaушes e lidar com as requisiушes HTTP. As classes de controladores mapeiam as rotas e chamam os métodos da camada de serviço.
+Controller Layer: Utiliza o padrão de design MVC (Model-View-Controller) para separar as preocupações e lidar com as requisições HTTP. As classes de controladores mapeiam as rotas e chamam os métodos da camada de serviço.
 
 Spring Boot Actuator
 O projeto utiliza o Spring Boot Actuator para fornecer informações sobre o status da aplicação e expor métricas de monitoramento. A configuração padrão inclui endpoints como:
@@ -106,11 +114,11 @@ info: Exibe informações gerais sobre a aplicação
 
 http://localhost:8080/v3/api-docs
 
-Esses endpoints ajudam na monitoraусo e garantem que a aplicação esteja funcionando corretamente em produção.
+Esses endpoints ajudam na monitoração e garantem que a aplicação esteja funcionando corretamente em produção.
 
 ## Conclusão
 
-Este projeto é um exemplo bрsico de uma aplicação CRUD utilizando Spring Boot, com uma arquitetura modular e padrões de projeto como DAO, DTO e Factory. Com o Spring Boot Actuator, é fácil monitorar a saúde da aplicação e expor informações úteis para a operação em produção.
+Este projeto é um exemplo básico de uma aplicação CRUD utilizando Spring Boot, com uma arquitetura modular e padrões de projeto como DAO, DTO e Factory. Com o Spring Boot Actuator, é fácil monitorar a saúde da aplicação e expor informações úteis para a operação em produção.
 
 Se tiver dúvidas ou problemas, sinta-se à vontade para abrir uma issue ou contribuir com melhorias!
 
