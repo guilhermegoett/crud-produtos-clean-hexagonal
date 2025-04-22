@@ -1,13 +1,14 @@
 # Projeto CRUD Spring Boot
 
-Este projeto È uma aplicaÁ„o CRUD (Create, Read, Update, Delete) desenvolvida com Spring Boot, utilizando um banco de dados H2 e integrando com o Spring Data JPA. A aplicaÁ„o foi projetada para gerenciar entidades de produtos de forma simples e eficiente.
+Este projeto √© uma aplica√ß√£o CRUD (Create, Read, Update, Delete) desenvolvida com Spring Boot, utilizando um banco de dados H2 e integrando com o Spring Data JPA. A aplica√ß√£o foi projetada para gerenciar entidades de produtos de forma simples e eficiente.
 
-## Sum·rio
+## Sum—Ärio
 
 1. [Como Executar](#como-executar)
 2. [Como Testar](#como-testar)
-3. [Padrıes de Projeto e Padrıes Usados](#padrıes-de-projeto-e-padrıes-usados)
-4. [Conclus„o](#conclus„o)
+3. [Documenta—É—Åo](#documenta√ß√£o)
+4. [padr√µes de Projeto e padr√µes Usados](#padr√µes-de-projeto-e-padr√µes-usados)
+5. [Conclus√£o](#conclus√£o)
 
 ---
 
@@ -21,13 +22,12 @@ Este projeto È uma aplicaÁ„o CRUD (Create, Read, Update, Delete) desenvolvida co
 
 ### Passos
 
-1. Clone o repositÛrio:
+1. Clone o reposit√≥rio:
 
-   ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
-   cd seu-repositorio
+   git clone https://github.com/guilhermegoett/crud-produtos-clean-hexagonal.git
+   cd crud
 
-2. Navegue atÈ o diretÛrio do projeto e execute o comando Maven para rodar a aplicaÁ„o:
+2. Navegue at√© o diret√≥rio do projeto e execute o comando Maven para rodar a aplica√ß√£o:
 
 No terminal:
 
@@ -37,12 +37,12 @@ mvn spring-boot:run
 ## Como Testar
 
 ### Testes Automatizados
-O projeto utiliza testes automatizados para garantir o bom funcionamento das funcionalidades. Estes testes est„o localizados na pasta src/test/java. Para rodar os testes unit·rios, utilize o comando Maven abaixo:
+O projeto utiliza testes automatizados para garantir o bom funcionamento das funcionalidades. Estes testes est√£o localizados na pasta src/test/java. Para rodar os testes unit√°rios, utilize o comando Maven abaixo:
 
 mvn test
 
 ### Testes de Health Check
-A aplicaÁ„o expıe endpoints para verificar seu status e sa˙de atravÈs do Spring Actuator. VocÍ pode testar a sa˙de da aplicaÁ„o acessando o seguinte endpoint (Este endpoint retornar· um JSON indicando o status da aplicaÁ„o):
+A aplica√ß√£o exp√µe endpoints para verificar seu status e sa√∫de atrav√©s do Spring Actuator. Voc√™ pode testar a sa√∫de da aplica√ß√£o acessando o seguinte endpoint (Este endpoint retornar√° um JSON indicando o status da aplica√ß√£o):
 
 
 http://localhost:8080/actuator/health
@@ -50,11 +50,11 @@ http://localhost:8080/actuator/health
 
 ### Testes de Funcionalidade
 
-A aplicaÁ„o possui endpoints REST para gerenciar produtos:
+A aplica√ß√£o possui endpoints REST para gerenciar produtos:
 
 GET /api/products: Listar todos os produtos
 
-GET /api/products/{id}: Buscar um produto especÌfico por ID
+GET /api/products/{id}: Buscar um produto espec√≠fico por ID
 
 POST /api/products: Criar um novo produto
 
@@ -62,46 +62,64 @@ PUT /api/products/{id}: Atualizar um produto existente
 
 DELETE /api/products/{id}: Deletar um produto
 
-VocÍ pode testar essas funcionalidades usando ferramentas como Postman ou cURL.
+Voc√™ pode testar essas funcionalidades usando ferramentas como Postman ou cURL.
 
-## Padrıes de Projeto e Padrıes Usados
+## Documenta√ß√£o
+
+A documenta√ß√£o da API est—Ä dispon√≠vel atrav√©s do Swagger e pode ser acessada diretamente atrav√©s da URL:
+
+http://localhost:8080/swagger-ui.html
+
+O Swagger ir√° fornecer uma interface interativa para visualizar todos os endpoints da API, enviar requisi√ß√µes e ver as respostas.
+
+## Padr√µes de Projeto e Padr√µes Usados
 
 ### Arquitetura
 
 O projeto segue uma arquitetura limpa e modular, dividida nas seguintes camadas:
 
-Controller Layer: Respons·vel por mapear as requisiÁıes HTTP para os serviÁos.
-Service Layer: ContÈm a lÛgica de negÛcio e interage com o repositÛrio.
-Repository Layer (DAO): Respons·vel pela persistÍncia dos dados. Utiliza o Spring Data JPA para abstrair a manipulaÁ„o direta do banco de dados.
+Controller Layer: Respons—Ävel por mapear as requisi—É—àes HTTP para os servi√ßos.
+Service Layer: Cont√©m a l√≥gica de neg√≥cio e interage com o reposit√≥rio.
+Repository Layer (DAO): Respons√°vel pela persist√™ncia dos dados. Utiliza o Spring Data JPA para abstrair a manipula√ß√£o direta do banco de dados.
 
-### Padrıes de Projeto
+### padr√µes de Projeto
 
-DAO (Data Access Object): Usado para encapsular o acesso ao banco de dados, permitindo que a aplicaÁ„o interaja com as entidades atravÈs de mÈtodos como save(), findById(), entre outros.
+DAO (Data Access Object): Usado para encapsular o acesso ao banco de dados, permitindo que a aplica√ß√£o interaja com as entidades atrav√©s de m√©todos como save(), findById(), entre outros.
 
-DTO (Data Transfer Object): Usado para transferir dados entre as camadas da aplicaÁ„o, evitando expor diretamente as entidades do banco de dados. O DTO È uma representaÁ„o simplificada dos dados que podem ser enviados ou recebidos por meio da API.
+DTO (Data Transfer Object): Usado para transferir dados entre as camadas da aplica√ß√£o, evitando expor diretamente as entidades do banco de dados. O DTO √© uma representa√ß√£o simplificada dos dados que podem ser enviados ou recebidos por meio da API.
 
-Factory Pattern: Embora o padr„o n„o tenha sido explicitamente implementado no cÛdigo, o Spring Boot utiliza o padr„o Factory para criaÁ„o de beans e objetos de configuraÁ„o, com a anotaÁ„o @Bean e o gerenciamento de dependÍncias do Spring Context.
+Factory Pattern: Embora o padr√£o n√£o tenha sido explicitamente implementado no c√≥digo, o Spring Boot utiliza o padr√£o Factory para cria√ß√£o de beans e objetos de configura√ß√£o, com a anota√ß√£o @Bean e o gerenciamento de depend√™ncias do Spring Context.
 
-Singleton: O Spring Boot usa o padr„o Singleton para gerenciar as inst‚ncias de beans, como serviÁos e repositÛrios, garantindo que apenas uma inst‚ncia seja criada durante a execuÁ„o da aplicaÁ„o.
+Singleton: O Spring Boot usa o padr√£o Singleton para gerenciar as inst√¢ncias de beans, como servi√ßos e reposit√≥rios, garantindo que apenas uma inst–†ncia seja criada durante a execu√ß√£o da aplica√ß√£o.
 
-Service Layer: A camada de serviÁo È respons·vel por implementar a lÛgica de negÛcio da aplicaÁ„o e por interagir com os repositÛrios para manipulaÁ„o dos dados.
+Service Layer: A camada de servi√ßo √© respons—Ävel por implementar a l–∑gica de neg–∑cio da aplica√ß√£o e por interagir com os reposit√≥rios para manipula—É—Åo dos dados.
 
-Controller Layer: Utiliza o padr„o de design MVC (Model-View-Controller) para separar as preocupaÁıes e lidar com as requisiÁıes HTTP. As classes de controladores mapeiam as rotas e chamam os mÈtodos da camada de serviÁo.
+Controller Layer: Utiliza o padr√£o de design MVC (Model-View-Controller) para separar as preocupa—É—àes e lidar com as requisi—É—àes HTTP. As classes de controladores mapeiam as rotas e chamam os m√©todos da camada de servi√ßo.
 
 Spring Boot Actuator
-O projeto utiliza o Spring Boot Actuator para fornecer informaÁıes sobre o status da aplicaÁ„o e expor mÈtricas de monitoramento. A configuraÁ„o padr„o inclui endpoints como:
-health: Verifica o status da aplicaÁ„o
-info: Exibe informaÁıes gerais sobre a aplicaÁ„o
-Esses endpoints ajudam na monitoraÁ„o e garantem que a aplicaÁ„o esteja funcionando corretamente em produÁ„o.
+O projeto utiliza o Spring Boot Actuator para fornecer informa√ß√µes sobre o status da aplica√ß√£o e expor m√©tricas de monitoramento. A configura√ß√£o padr√£o inclui endpoints como:
+health: Verifica o status da aplica√ß√£o
 
-## Conclus„o
+http://localhost:8080/actuator/health
 
-Este projeto È um exemplo b·sico de uma aplicaÁ„o CRUD utilizando Spring Boot, com uma arquitetura modular e padrıes de projeto como DAO, DTO e Factory. Com o Spring Boot Actuator, È f·cil monitorar a sa˙de da aplicaÁ„o e expor informaÁıes ˙teis para a operaÁ„o em produÁ„o.
+info: Exibe informa√ß√µes gerais sobre a aplica√ß√£o
 
-Se tiver d˙vidas ou problemas, sinta-se ‡ vontade para abrir uma issue ou contribuir com melhorias!
+http://localhost:8080/v3/api-docs
 
-### Como usar:
+Esses endpoints ajudam na monitora—É—Åo e garantem que a aplica√ß√£o esteja funcionando corretamente em produ√ß√£o.
 
-1. **Como Executar**: O fluxo comeÁa com a clonagem do repositÛrio, configuraÁ„o do ambiente (Java 17), e execuÁ„o da aplicaÁ„o com Maven.
-2. **Como Testar**: InstruÁıes sobre como executar os testes automatizados, verificar a sa˙de da aplicaÁ„o com Actuator, e testar os endpoints via Postman ou cURL.
-3. **Padrıes de Projeto**: ExplicaÁ„o sobre a arquitetura e padrıes de projeto utilizados no sistema, c
+## Conclus√£o
+
+Este projeto √© um exemplo b—Äsico de uma aplica√ß√£o CRUD utilizando Spring Boot, com uma arquitetura modular e padr√µes de projeto como DAO, DTO e Factory. Com o Spring Boot Actuator, √© f√°cil monitorar a sa√∫de da aplica√ß√£o e expor informa√ß√µes √∫teis para a opera√ß√£o em produ√ß√£o.
+
+Se tiver d√∫vidas ou problemas, sinta-se √† vontade para abrir uma issue ou contribuir com melhorias!
+
+## Licen√ßa
+
+Este projeto √© distribu√≠do sob a licen√ßa MIT. Veja `LICENSE` para mais informa√ß√µes.
+
+---
+
+## Contato
+
+Caso tenha d√∫vidas ou sugest√µes, entre em contato pelo e-mail **[guilhermegoet@gmail.com](mailto:guilhermegoet@gmail.com)**.
