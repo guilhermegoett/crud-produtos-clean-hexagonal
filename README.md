@@ -1,4 +1,4 @@
-# Projeto CRUD Spring Boot
+# Projeto CRUD Api Produtos Spring Boot
 
 Este projeto é uma aplicação CRUD (Create, Read, Update, Delete) desenvolvida com Spring Boot, utilizando um banco de dados H2 e integrando com o Spring Data JPA. A aplicação foi projetada para gerenciar entidades de produtos de forma simples e eficiente.
 
@@ -7,10 +7,11 @@ Este projeto é uma aplicação CRUD (Create, Read, Update, Delete) desenvolvida
 1. [Como Executar](#como-executar)
 2. [Como Testar](#como-testar)
 3. [Documentação](#documentação)
-4. [Padrões de Projeto e padrões Usados](#padrões-de-projeto-e-padrões-usados)
-5. [Conclusão](#conclusão)
-6. [Licença](#licença)
-7. [Contato](#contato)
+4. [Tratamento de Erros](#tratamento-de-erros)
+5. [Padrões de Projeto e padrões Usados](#padrões-de-projeto-e-padrões-usados)
+6. [Conclusão](#conclusão)
+7. [Licença](#licença)
+8. [Contato](#contato)
 
 ---------
 
@@ -75,6 +76,23 @@ A documentação da API estр disponível através do Swagger e pode ser acessad
 http://localhost:8080/swagger-ui.html
 
 O Swagger irá fornecer uma interface interativa para visualizar todos os endpoints da API, enviar requisições e ver as respostas.
+
+## Tratamento de Erros
+
+A aplicação utiliza a anotação @ControllerAdvice para capturar e tratar exceções de forma centralizada e elegante, seguindo os princípios do Clean Code e separação de responsabilidades.
+
+Foi criada uma classe de configuração dedicada ao tratamento de exceções globais, permitindo que qualquer erro seja interceptado e retornado ao cliente com uma mensagem clara e apropriada.
+
+Atualmente, a aplicação trata explicitamente a exceção IllegalArgumentException, que é lançada quando ocorrem erros de validação nos dados de entrada. Um exemplo prático é o tratamento do caso de preço negativo durante a criação de um produto.
+
+Exemplo de resposta para entrada inválida:
+
+{
+    "error": "Preço inválido",
+    "message": "O campo 'preço' deve ser um valor positivo.",
+    "timestamp": "2025-04-21T21:28:44.3605334",
+    "status": 400
+}
 
 ## Padrões de Projeto e Padrões Usados
 
