@@ -1,10 +1,10 @@
 package com.goett.crud.produtosapi.application.service;
 
 import com.goett.crud.produtosapi.application.port.out.ProdutoRepository;
+import com.goett.crud.produtosapi.domain.factory.ProdutoFactory;
 import com.goett.crud.produtosapi.domain.model.Produto;
 import com.goett.crud.produtosapi.dto.ProdutoDTO;
 import com.goett.crud.produtosapi.dto.ProdutoMapper;
-import com.goett.crud.produtosapi.infrastructure.persistence.entity.ProdutoEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,47 +15,53 @@ import java.util.stream.Collectors;
 public class ProdutoService {
 
     private final ProdutoRepository produtoRepository;
+    private final ProdutoFactory produtoFactory;
+    private final ProdutoMapper produtoMapper;
 
-    public ProdutoService(ProdutoRepository produtoRepository) {
+    public ProdutoService(ProdutoRepository produtoRepository, ProdutoFactory produtoFactory, ProdutoMapper produtoMapper) {
         this.produtoRepository = produtoRepository;
+        this.produtoFactory = produtoFactory;
+        this.produtoMapper = produtoMapper;
     }
 
     public ProdutoDTO criarProduto(ProdutoDTO dto) {
         // Conversão DTO -> Domínio com validação de regra
-        Produto produtoDomain = ProdutoMapper.toDomain(dto);
+        Produto produtoDomain = produtoFactory.criarProduto(dto);
 
-        // Conversão Domínio -> Entidade para persistência
-        ProdutoEntity entity = ProdutoMapper.toEntity(produtoDomain);
+        // Salvar no repositório e obter o domínio salvo
+        Produto salvo = produtoRepository.salvar(produtoDomain);
 
-        ProdutoEntity salvo = produtoRepository.salvar(entity);
-
-        // Retornar DTO
-        return ProdutoMapper.toDTO(salvo);
+        // Retornar o DTO correspondente ao produto salvo
+        return produtoMapper.toDTO(salvo);
     }
 
     public ProdutoDTO atualizarProduto(Long id, ProdutoDTO dto) {
-        Produto produtoDomain = ProdutoMapper.toDomain(dto);
-        ProdutoEntity entity = ProdutoMapper.toEntity(produtoDomain);
-        entity.setId(id); // Preserva ID
+        // Converter o DTO para o domínio
+        Produto produtoAtualizado = new Produto(id, dto.getNome(), dto.getDescricao(), dto.getPreco(), dto.getQuantidade());
 
-        ProdutoEntity atualizado = produtoRepository.atualizar(entity);
+        // Atualizar no repositório e obter o produto atualizado
+        Produto atualizado = produtoRepository.atualizar(produtoAtualizado);
 
-        return ProdutoMapper.toDTO(atualizado);
+        // Retornar o DTO do produto atualizado
+        return produtoMapper.toDTO(atualizado);
     }
 
     public void deletarProduto(Long id) {
+        // Deletar o produto pelo ID
         produtoRepository.deletar(id);
     }
 
     public List<ProdutoDTO> listarTodos() {
+        // Buscar todos os produtos do repositório e convertê-los para DTO
         return produtoRepository.buscarTodos()
                 .stream()
-                .map(ProdutoMapper::toDTO)
+                .map(produtoMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
     public Optional<ProdutoDTO> buscarPorId(Long id) {
+        // Buscar produto por ID e converter para DTO, se presente
         return produtoRepository.buscarPorId(id)
-                .map(ProdutoMapper::toDTO);
+                .map(produtoMapper::toDTO);
     }
 }

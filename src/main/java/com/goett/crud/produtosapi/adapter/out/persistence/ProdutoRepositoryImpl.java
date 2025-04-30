@@ -1,30 +1,38 @@
 package com.goett.crud.produtosapi.adapter.out.persistence;
 
 import com.goett.crud.produtosapi.application.port.out.ProdutoRepository;
+import com.goett.crud.produtosapi.domain.model.Produto;
 import com.goett.crud.produtosapi.infrastructure.persistence.entity.ProdutoEntity;
-
-import org.springframework.stereotype.Component;
+import com.goett.crud.produtosapi.dto.ProdutoMapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-@Component
+@Repository
 public class ProdutoRepositoryImpl implements ProdutoRepository {
 
     private final ProdutoJpaRepository produtoJpaRepository;
+    private final ProdutoMapper produtoMapper;
 
-    public ProdutoRepositoryImpl(ProdutoJpaRepository produtoJpaRepository) {
+    public ProdutoRepositoryImpl(ProdutoJpaRepository produtoJpaRepository, ProdutoMapper produtoMapper) {
         this.produtoJpaRepository = produtoJpaRepository;
+        this.produtoMapper = produtoMapper;
     }
 
     @Override
-    public ProdutoEntity salvar(ProdutoEntity produto) {
-        return produtoJpaRepository.save(produto);
+    public Produto salvar(Produto produto) {
+        ProdutoEntity entity = produtoMapper.toEntity(produto);
+        ProdutoEntity salvo = produtoJpaRepository.save(entity);
+        return produtoMapper.toDomain(salvo);
     }
 
     @Override
-    public ProdutoEntity atualizar(ProdutoEntity produto) {
-        return produtoJpaRepository.save(produto); // save faz update se ja existir o ID
+    public Produto atualizar(Produto produto) {
+        ProdutoEntity entity = produtoMapper.toEntity(produto);
+        ProdutoEntity atualizado = produtoJpaRepository.save(entity);
+        return produtoMapper.toDomain(atualizado);
     }
 
     @Override
@@ -33,12 +41,16 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
     }
 
     @Override
-    public Optional<ProdutoEntity> buscarPorId(Long id) {
-        return produtoJpaRepository.findById(id);
+    public Optional<Produto> buscarPorId(Long id) {
+        return produtoJpaRepository.findById(id)
+                .map(produtoMapper::toDomain);
     }
 
     @Override
-    public List<ProdutoEntity> buscarTodos() {
-        return produtoJpaRepository.findAll();
+    public List<Produto> buscarTodos() {
+        return produtoJpaRepository.findAll()
+                .stream()
+                .map(produtoMapper::toDomain)
+                .collect(Collectors.toList());
     }
 }

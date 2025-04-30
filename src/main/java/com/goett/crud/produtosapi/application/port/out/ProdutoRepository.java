@@ -1,15 +1,15 @@
 package com.goett.crud.produtosapi.application.port.out;
 
+import com.goett.crud.produtosapi.domain.model.Produto;
+
 import java.util.List;
 import java.util.Optional;
 
-import com.goett.crud.produtosapi.infrastructure.persistence.entity.ProdutoEntity;
-
 public interface ProdutoRepository {
 
-    ProdutoEntity salvar(ProdutoEntity produto);
-    ProdutoEntity atualizar(ProdutoEntity produto);
+    Produto salvar(Produto produto);
+    Produto atualizar(Produto produto);
     void deletar(Long id);
-    Optional<ProdutoEntity> buscarPorId(Long id);
-    List<ProdutoEntity> buscarTodos();
+    Optional<Produto> buscarPorId(Long id);
+    List<Produto> buscarTodos();
 }
